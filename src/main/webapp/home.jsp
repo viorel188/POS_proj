@@ -21,5 +21,6 @@
 	Id: <input name="uid"><br>
 	<input type="submit" name="submit" value="submit" /><br>
 	</form>
+	${user}
 </body>
 </html>
