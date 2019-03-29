@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%@ page import="com.tinder.demo.Users" %>
 	hello world!
 	
 	<h1>Add user</h1>
@@ -21,6 +22,15 @@
 	Id: <input name="uid"><br>
 	<input type="submit" name="submit" value="submit" /><br>
 	</form>
-	${user}
+	<!-- ${user}  -->
+	<%
+		if(session.getAttribute("user")!=null){
+	%>
+			Hello, <% Users u = (Users)session.getAttribute("user"); %> <%= u.getName() %>
+	<%
+		}else{
+			response.sendRedirect("loginup.jsp");
+		}
+	%>
 </body>
 </html>

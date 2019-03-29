@@ -24,7 +24,9 @@ public class Users {
 	private String height;
 	private String weight;
 	private String religion;
-	private String location;
+	private String region;
+	private String country;
+	private String city_state;
 	
 	public long getId() {
 		return id;
@@ -154,27 +156,37 @@ public class Users {
 		this.religion = religion;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getRegion() {
+		return region;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCity_state() {
+		return city_state;
+	}
+
+	public void setCity_state(String city_state) {
+		this.city_state = city_state;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Users [id=").append(id).append(", name=").append(name).append(", pass=").append(pass)
-				.append(", lastname=").append(lastname).append(", email=").append(email).append(", phonenr=")
-				.append(phonenr).append(", imgpath=").append(imgpath).append(", description=").append(description)
-				.append(", language=").append(language).append(", sex=").append(sex).append(", age=").append(age)
-				.append(", interestedin=").append(interestedin).append(", etnicity=").append(etnicity)
-				.append(", height=").append(height).append(", weight=").append(weight).append(", religion=")
-				.append(religion).append(", location=").append(location).append("]");
+		builder.append("Users [name=").append(name).append(", lastname=").append(lastname).append(", email=")
+				.append(email).append("]");
 		return builder.toString();
-	}
-	
+	}	
 	
 	
 }

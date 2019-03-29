@@ -4,12 +4,16 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -23,24 +27,22 @@ public class HomeController {
 	UserRepo repo;
 
 	@PostMapping("/addUser")
-	public ModelAndView addUsers(Users user, @RequestParam("re_pass") String rePass) {
+	public ModelAndView addUsers(Users user, @RequestParam("re_pass") String rePass, HttpSession session) {
 		ModelAndView error = new ModelAndView("loginup.jsp");
 		if (user.getPass().equals(rePass) && !rePass.equals("")) {
 			List<Users> users = repo.findByEmail(user.getEmail());
 			if (!users.isEmpty()) {
-				System.out.println("emailul: " + users.get(0).getName() + " " + users.get(0).getEmail());
 				error.addObject("email_err", "*Email used already exists!");
 				return error;
 			} else {
-				ModelAndView mv = new ModelAndView("home.jsp");
+				ModelAndView mv = new ModelAndView("continueRegistration.jsp");
+				session.setAttribute("user",user);
 				final int logRounds = 10;
 				user.setPass(BCrypt.hashpw(user.getPass(),BCrypt.gensalt(logRounds)));
-				System.out.println(user);
 				repo.save(user);
 				return mv;
 			}
 		} else {
-			System.out.println("Passwords don't match!");
 			error.addObject("pass_err", "*Passwords don't match!");
 			return error;
 		}
@@ -48,7 +50,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/login")
-	ModelAndView loginUser(@RequestParam("email") String email, @RequestParam("mypass") String pass) {
+	ModelAndView loginUser(@RequestParam("email") String email, @RequestParam("mypass") String pass, HttpSession session) {
 		ModelAndView errorView = new ModelAndView("loginup.jsp");
 		List<Users> users = repo.findByEmail(email);
 		if (!users.isEmpty()) {
@@ -56,6 +58,7 @@ public class HomeController {
 			boolean doesMatch = BCrypt.checkpw(pass, cryptedPassFromDataBase);
 			if( doesMatch ) {
 				ModelAndView userView = new ModelAndView("home.jsp");
+				session.setAttribute("user",users.get(0));
 				userView.addObject("user", "*good boi!");
 				return userView;
 			}else {
@@ -66,6 +69,21 @@ public class HomeController {
 			errorView.addObject("email_err","*Wrong email!");
 			return errorView;
 		}
+	}
+	
+	@PutMapping("/updateUser")
+	public ModelAndView updateUser(Users user, HttpSession session) {
+		Users currentUser = (Users) session.getAttribute("user");
+		System.out.println("\n\nfrom form: "+user.getName() + " " +user.getLastname());
+		System.out.println("\n\nsession: "+currentUser.getName() + " " + currentUser.getLastname());
+		return null;
+	}
+	
+	@PutMapping("/updateSmth")
+	@ResponseBody
+	public String upSmth(String data) {
+		System.out.println("De la PUT: "+data);
+		return data;
 	}
 
 	@RequestMapping("/getUser")
