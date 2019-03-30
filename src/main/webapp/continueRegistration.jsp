@@ -19,16 +19,15 @@
 		}
 	%>
 	Fill in your missing data!
-	<form action="/updateUser" method="PUT">
-	Name: <input type="text" name="name"/><br>
-	Lastname: <input type="text" name="lastname"/><br>
-	Phone number: <input type="text" name="phonenr"/><br>
+	Name: <input type="text" id="name" name="name"/><br>
+	Lastname: <input type="text" id="lastname" name="lastname"/><br>
+	Phone number: <input type="text" id="phonenr" name="phonenr"/><br>
 	Profile image:
-	<input type="file" name="imgpath" accept="image/*" /><br>
+	<input type="file" name="imgpath" id="imgpath" accept="image/*" /><br>
 	Description:
-	<textarea rows="10" cols="30" name="description"></textarea><br>
+	<textarea rows="10" cols="30" id="description" name="description"></textarea><br>
 	Preferred language:
-	<select data-placeholder="Choose a Language..." name="language">
+	<select data-placeholder="Choose a Language..." id="language" name="language">
 		  <option value="AF">Afrikanns</option>
 		  <option value="SQ">Albanian</option>
 		  <option value="AR">Arabic</option>
@@ -103,16 +102,16 @@
 		  <option value="XH">Xhosa</option>
 	</select>
 	<br>
-	Sex: <select data-placeholder="Choose sex..." name="sex"><option value="f">F</option><option value="m">M</option></select><br>
-	Age: <input type="number" name="age" min=0 max=160/><br>
-	Interested in: 	<select data-placeholder="Interested in..." name="interestedin">
+	Sex: <select data-placeholder="Choose sex..." id="sex" name="sex"><option value="f">F</option><option value="m">M</option></select><br>
+	Age: <input type="number" id="age" name="age" min=0 max=160/><br>
+	Interested in: 	<select id="interestedin" data-placeholder="Interested in..." name="interestedin">
 						<option value="w">Women</option>
 						<option value="m">Men</option>
 					</select><br>
-	Ethnicity: <input type="text" name="etnicity" /><br>
-	Height: <input type="number" name="height" min=0 max=300/> cm<br>
-	Weight: <input type="number" name="height" min=0 max=1000/> kg<br>
-	Religion: <select name="">
+	Ethnicity: <input id="etnicity" type="text" name="etnicity" /><br>
+	Height: <input id="height" type="number" name="height" min=0 max=300/> cm<br>
+	Weight: <input id="weight" type="number" name="weight" min=0 max=1000/> kg<br>
+	Religion: <select id="religion" name="">
   <option name="religion">-- select one --</option>
   <option value="African Traditional & Diasporic">African Traditional & Diasporic</option>
   <option value="Agnostic">Agnostic</option>
@@ -143,18 +142,59 @@
 	<br>
 	<b>Location</b><br>
 	
-		Region&raquo; <select onchange="set_country(this,country,city_state)" size="1" name="region">
+		Region&raquo; <select onchange="set_country(this,country,city_state)" id="region" size="1" name="region">
 		<option value="" selected="selected">SELECT REGION</option>
 		<option value=""></option>
 		<script type="text/javascript">
 		setRegions(this);
 		</script>
 		</select>
-		Country&raquo; <select name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
-		City/State&raquo; <select name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
-		<input type="submit" name="continueReg" value="update" /> 
-	</form>
+		Country&raquo; <select id="country" name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
+		City/State&raquo; <select id="city_state" name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
+		<input type="submit" onclick="updateUser()" name="continueReg" value="update" /> 
+
 		<div id="txtregion"></div>
 		<div id="txtplacename"></div>
+		
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script>
+		function updateUser(){
+			var n = $('#name').val();
+			var l = $('#lastname').val();
+			var p = $('#phonenr').val();
+			alert("yo "+n+l+p);
+			var updateData = JSON.stringify(
+					{
+					name : $('#name').val(),
+					lastname : $('#lastname').val(),
+					phonenr : $('#phonenr').val(),
+					imgpath : $('#imgpath').val(),
+					description : $('#description').val(),
+					language :  $( "#language option:selected" ).text(),
+					sex : $( "#sex option:selected" ).text(),
+					age : $('#age').val(),
+					interestedin : $( "#interestedin option:selected" ).text(),
+					etnicity : $('#etnicity').val(),
+					height : $('#height').val(),
+					weight : $('#weight').val(),
+					religion : $( "#religion option:selected" ).text(),
+					region : $( "#region option:selected" ).text(),
+					country : $( "#country option:selected" ).text(),
+					city_state : $( "#city_state option:selected" ).text() 
+					}
+				);
+			$.ajax('/updateUser', {
+				type: 'PUT',
+				contentType: 'application/json',
+				data: updateData,
+				success: function(data){
+					//alert(" sent " +data);
+				},
+				error: function(jqXhr, textStatus, errorMessage){
+					//alert("wtf: "+errorMessage)
+				}
+			});
+		}
+	</script>
 </body>
 </html>

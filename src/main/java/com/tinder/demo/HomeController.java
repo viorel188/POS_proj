@@ -1,5 +1,6 @@
 package com.tinder.demo;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -11,10 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class HomeController {
@@ -72,17 +77,53 @@ public class HomeController {
 	}
 	
 	@PutMapping("/updateUser")
-	public ModelAndView updateUser(Users user, HttpSession session) {
-		Users currentUser = (Users) session.getAttribute("user");
-		System.out.println("\n\nfrom form: "+user.getName() + " " +user.getLastname());
-		System.out.println("\n\nsession: "+currentUser.getName() + " " + currentUser.getLastname());
-		return null;
+	public String updateUser(@RequestBody Users user, HttpSession session) {
+		ModelAndView profile = new ModelAndView("userProfile.jsp");
+		Users currentUser = (Users) session.getAttribute("user");		
+		List<Users> users = repo.findByEmail(currentUser.getEmail());
+		Users userToUpdate = null;
+		if (!users.isEmpty()) {
+			userToUpdate = users.get(0);
+			userToUpdate.setLastname(user.getLastname());
+			userToUpdate.setPhonenr(user.getPhonenr());
+			userToUpdate.setImgpath(user.getImgpath());
+			userToUpdate.setDescription(user.getDescription());
+			userToUpdate.setLanguage(user.getLanguage());
+			userToUpdate.setSex(user.getSex());
+			userToUpdate.setAge(user.getAge());
+			userToUpdate.setInterestedin(user.getInterestedin());
+			userToUpdate.setEtnicity(user.getEtnicity());
+			userToUpdate.setHeight(user.getHeight());
+			userToUpdate.setWeight(user.getWeight());
+			userToUpdate.setReligion(user.getReligion());
+			userToUpdate.setRegion(user.getRegion());
+			userToUpdate.setCountry(user.getCountry());
+			userToUpdate.setCity_state(user.getCity_state());
+			repo.save(userToUpdate);
+		}else {
+			System.out.println("NO USER with this ID");
+		}
+		return "userProfile.jsp";
 	}
 	
 	@PutMapping("/updateSmth")
 	@ResponseBody
-	public String upSmth(String data) {
+	public String upSmth(@RequestBody String data) {
 		System.out.println("De la PUT: "+data);
+	    ObjectMapper mapper = new ObjectMapper();
+	    JsonNode actualObj;
+		try {
+			actualObj = mapper.readTree(data);
+			System.out.println("Actual obj: "+actualObj);
+		    // When
+		    JsonNode jsonNode1 = actualObj.get("nume");
+		    System.out.println("De la PUT: "+jsonNode1.textValue());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 
+
 		return data;
 	}
 

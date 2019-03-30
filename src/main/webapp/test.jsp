@@ -15,14 +15,15 @@
 	<script>
 		function getSmth(){
 			
-			var sendData = $('#name').val();
+			var numee = $('#name').val();
+			myData = JSON.stringify({"nume" : numee});
 			//alert("before: "+sendData);
 			$.ajax('/updateSmth', {
 				type: 'PUT',
-				dataType: 'text',
-				data: sendData,
+				contentType: 'application/json',
+				data: myData,
 				success: function(data){
-					alert(sendData+" sent " +data);
+					alert(myData.nume+" sent " +data);
 				},
 				error: function(jqXhr, textStatus, errorMessage){
 					alert("wtf: "+errorMessage)
