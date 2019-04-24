@@ -162,7 +162,7 @@
 			var n = $('#name').val();
 			var l = $('#lastname').val();
 			var p = $('#phonenr').val();
-			alert("yo "+n+l+p);
+			//alert("yo "+n+l+p);
 			var updateData = JSON.stringify(
 					{
 					name : $('#name').val(),
@@ -184,14 +184,17 @@
 					}
 				);
 			$.ajax('/updateUser', {
-				type: 'PUT',
+				type: 'POST',
 				contentType: 'application/json',
 				data: updateData,
-				success: function(data){
-					//alert(" sent " +data);
+				success: function(data, textStatus, jqXHR ){
+					location.replace("http://localhost:8080/userProfile.jsp");
+					//alert(" sent " +data + ", status: "+textStatus);
 				},
 				error: function(jqXhr, textStatus, errorMessage){
-					//alert("wtf: "+errorMessage)
+					console.log(jqXhr);
+//					alert(jqXhr);
+//					alert("idk: "+errorMessage + " , textStatus: " + textStatus + " , jqXhr: "+jqXhr);
 				}
 			});
 		}

@@ -76,8 +76,8 @@ public class HomeController {
 		}
 	}
 	
-	@PutMapping("/updateUser")
-	public String updateUser(@RequestBody Users user, HttpSession session) {
+	@PostMapping("/updateUser")
+	public ModelAndView updateUser(@RequestBody Users user, HttpSession session) {
 		ModelAndView profile = new ModelAndView("userProfile.jsp");
 		Users currentUser = (Users) session.getAttribute("user");		
 		List<Users> users = repo.findByEmail(currentUser.getEmail());
@@ -103,7 +103,7 @@ public class HomeController {
 		}else {
 			System.out.println("NO USER with this ID");
 		}
-		return "userProfile.jsp";
+		return profile;
 	}
 	
 	@PutMapping("/updateSmth")
