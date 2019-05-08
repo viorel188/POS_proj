@@ -1,5 +1,7 @@
 package com.tinder.demo;
 
+import java.io.File;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MyTinderApplication {
 
 	public static void main(String[] args) {
+		new File(HomeController.uploadDirectory).mkdir();
 		SpringApplication.run(MyTinderApplication.class, args);
 	}
 

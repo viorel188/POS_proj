@@ -1,21 +1,25 @@
 package com.tinder.demo;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -104,6 +108,35 @@ public class HomeController {
 			System.out.println("NO USER with this ID");
 		}
 		return profile;
+	}
+	
+	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/webapp/profileImages";
+	@PostMapping("uploadFiles")
+	public String uploadFiles(Model model, @RequestParam("files") MultipartFile file, HttpSession session) {
+		StringBuilder filenames = new StringBuilder();
+		String username = ((Users)session.getAttribute("user")).getName();
+		String userImagesPath = uploadDirectory + "/" + username;
+		new File(userImagesPath).mkdir();
+		Path filenameAndPath = Paths.get(userImagesPath,file.getOriginalFilename());
+		filenames.append(file.getOriginalFilename());
+		try {
+			Files.write(filenameAndPath,file.getBytes());
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		Users currentUser = (Users) session.getAttribute("user");		
+		List<Users> users = repo.findByEmail(currentUser.getEmail());
+		Users userToUpdate = null;
+		if (!users.isEmpty()) {
+			userToUpdate = users.get(0);
+			userToUpdate.setImgpath( "profileImages/"+username + "/" + file.getOriginalFilename() );//filenameAndPath.toString() );
+			System.out.println("Img: " + userToUpdate.getImgpath());
+			session.setAttribute("user", userToUpdate);
+			repo.save(userToUpdate);
+		}else {
+			System.out.println("uploadFilesFunction: NO USER with this ID");
+		}
+		return "userProfile.jsp";
 	}
 	
 	@PutMapping("/updateSmth")

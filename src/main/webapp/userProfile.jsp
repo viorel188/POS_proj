@@ -12,7 +12,13 @@
 		if(session.getAttribute("user")!=null){
 	%>
 			Hello, <% Users u = (Users)session.getAttribute("user"); %> <%= u.getName() %>!
+			<img src="<%=u.getImgpath()%>" alt="profile img" height="100" weight="100">
 			This is your profile page.
+			
+			<form action="/uploadFiles" method="post" enctype="multipart/form-data">
+				<input type="file" name="files" /> <!-- multiple /><br> -->
+				<input type="submit" /><br>
+			</form>
 	<%
 		}else{
 			response.sendRedirect("loginup.jsp");

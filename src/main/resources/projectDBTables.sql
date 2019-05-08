@@ -294,7 +294,7 @@ CREATE TABLE `users` (
   `lastname` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `phonenr` int(11) DEFAULT NULL,
-  `imgpath` varchar(45) DEFAULT NULL,
+  `imgpath` varchar(199) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `language` varchar(45) DEFAULT NULL,
   `sex` varchar(45) DEFAULT NULL,
@@ -309,7 +309,7 @@ CREATE TABLE `users` (
   `city_state` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -318,7 +318,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1,'Vio','pass',NULL,'sd@mail.ru',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'Nemo','pas',NULL,'fd',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'boi','boi',NULL,'boi@boi.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,'mike','qwerty123',NULL,'mike@yahoo.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,'mihai','$2a$10$mx2BOJ5YdaR4moPTaUYbAeMwoYqnTwqx1bJ1j0TtCbvRvIBVx8Hh2',NULL,'mihaicrotioru10@yahoo.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,'Mihai Croitoru','$2a$10$QA0QySu3I8mdlnenIhy2bONeBuhjue8CVA9VXCC6WJQYOfRmxusma',NULL,'mike1000@yahoo.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(1,'Vio','pass',NULL,'sd@mail.ru',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(2,'Nemo','pas',NULL,'fd',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(20,'boi','boi',NULL,'boi@boi.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(21,'mike','qwerty123',NULL,'mike@yahoo.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(22,'mihai','$2a$10$mx2BOJ5YdaR4moPTaUYbAeMwoYqnTwqx1bJ1j0TtCbvRvIBVx8Hh2',NULL,'mihaicrotioru10@yahoo.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(23,'Mihai Croitoru','$2a$10$QA0QySu3I8mdlnenIhy2bONeBuhjue8CVA9VXCC6WJQYOfRmxusma',NULL,'mike1000@yahoo.com',0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,'bob','$2a$10$HZ/s7Hd7fQrcSN1xm3xFxOcZv8ncVinRMqpg0CKX55AgDFc0.xWtu','Bobl','bob@b.com',123,'C:\\fakepath\\Pasaport_CasapuViorel.jpg','balkfj','Afrikanns','F',23,'Women','boby',123,23,'Cao Dai','Europe','France','Ile-de-France'),(25,'gol','$2a$10$k2PwKhV94myy8qbGeSCOKeGRoLghnox6XpZxE.acMLmcilVkYQfbq','Goll','gol@g.com',123,'C:\\fakepath\\Pasaport_CasapuViorel.jpg','sdfa','Afrikanns','F',23,'Women','golish',170,70,'Hinduism','Europe','Romania','Ialomita'),(26,'myname','$2a$10$PYmRgxVSODMkSfcjOKaGPuiKDDj1RvfU6aMUK0vgYJwqukw8tyqQ2','mylastname','myname@m.com',1234,'','asdf','Afrikanns','F',23,'Women','efsf',160,56,'Secular','Europe','Romania','Ialomita'),(27,'men','$2a$10$r1mlOp3SNUuEJvvxSeXpeuIRoJWtmEsmBFRmGXr6N2YRn9c/gmZ3y','menn','men@m.com',342,'profileImages/men/Pasaport_CasapuViorel.jpg','jlksdfj','Afrikanns','F',23,'Women','bl',189,89,'Secular','Europe','Romania','Constanta');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -331,4 +331,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-04-24  8:15:23
+-- Dump completed on 2019-05-08 17:36:35
