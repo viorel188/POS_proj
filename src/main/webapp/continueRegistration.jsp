@@ -4,7 +4,40 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Continue Registration</title>
+<style>
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body {
+  /* background-image: url("img_tree.gif"), url("paper.gif"); */
+  background-color: #fffdce;
+}
+ html {
+    height: 100%;
+    line-height: 1.8;
+    style="margin-bottom: 10px;
+    padding-bottom: 20px;
+    background-color: #fffdce;
+   
+}
+
+textarea { height: auto;
+			width: auto;  }
+/* Full height image header */
+/* .bgimg-1 {
+    background-position: center;
+    /* background-size: cover; */
+/*     background-size: auto;
+      background-color: #fffdce;  
+    min-height: 600px;
+    background-repeat: repeat;
+
+} */ 
+
+
+</style>
 </head>
 <body>
 <script src="js/city_state.js"></script>
@@ -18,16 +51,50 @@
 			response.sendRedirect("loginup.jsp");
 		}
 	%>
-	Fill in your missing data!
+	<!-- Fill in your missing data!
 	Name: <input type="text" id="name" name="name"/><br>
-	Lastname: <input type="text" id="lastname" name="lastname"/><br>
-	Phone number: <input type="text" id="phonenr" name="phonenr"/><br>
-	Profile image:
-	<input type="file" name="imgpath" id="imgpath" accept="image/*" /><br>
-	Description:
-	<textarea rows="10" cols="30" id="description" name="description"></textarea><br>
-	Preferred language:
-	<select data-placeholder="Choose a Language..." id="language" name="language">
+	Lastname: <input type="text" id="lastname" name="lastname"/><br> -->
+	     <!-- Name asd lastname -->
+  <div class="w3-container">
+    <div class="w3-panel w3-padding-16 w3-pale-green w3-opacity w3-card w3-hover-opacity-off">
+      <h2 class="w3-center">Fill in your missing data!</h2>
+      <div class="w3-row-padding">
+      <div class="w3-half">
+      <label>Name</label>
+      <input class="w3-input w3-border w3-padding-16" type="text" id="name"  placeholder="Insert your given name" name="name"/>
+        </div>
+   
+       	 <div class="w3-half">
+	      <label>Last Name</label><br>
+	      <input class="w3-input w3-border w3-padding-16"  type="text" id="lastname"  placeholder="Insert your Last Name" name="lastname"/>
+   		 </div>
+    </div>
+   </div>
+  </div>
+     <!-- Detailed Info-->
+     <div class="w3-container">
+    <div class="w3-panel w3-padding-16  w3-pale-blue w3-opacity w3-card w3-hover-opacity-off">
+      <h2 class="w3-center">Detailed Personal Info!</h2>
+      <div class="w3-row-padding">
+      <div class="w3-half">
+      <label>Phone number</label>
+      <input class="w3-input w3-border " type="text" id="phonenr" name="phonenr" placeholder="Insert your phone number" />
+        </div>
+       	 <div class="w3-half">
+	      <label>Profile Image</label><br>
+	      <input  class="w3-input w3-border "  type="file" name="imgpath" id="imgpath" accept="image/*" />
+   		 </div>
+   		 </div>
+   		 <br>
+   		 <div class="w3-row-padding">
+   		      <div class="w3-half">
+      <label>Description</label>
+      <textarea   id="description"  placeholder="Tell the world about yourself..." name="description"></textarea><br>
+     
+        </div>
+             <div class="w3-half  ">
+      <label>Preferred language</label>
+      	<select  data-placeholder="Choose a Language..." id="language" name="language">
 		  <option value="AF">Afrikanns</option>
 		  <option value="SQ">Albanian</option>
 		  <option value="AR">Arabic</option>
@@ -101,60 +168,201 @@
 		  <option value="CY">Welsh</option>
 		  <option value="XH">Xhosa</option>
 	</select>
-	<br>
-	Sex: <select data-placeholder="Choose sex..." id="sex" name="sex"><option value="f">F</option><option value="m">M</option></select><br>
-	Age: <input type="number" id="age" name="age" min=0 max=160/><br>
-	Interested in: 	<select id="interestedin" data-placeholder="Interested in..." name="interestedin">
+        </div>
+        </div>
+        <br>
+        <div class="w3-row-padding">
+        <div class="w3-half">
+      <label>Sex</label>
+      <select   data-placeholder="Choose sex..." id="sex" name="sex"><option value="f">Female</option><option value="m">Male</option></select>
+        </div>
+        <div class="w3-half">
+      <label>Age</label>
+       <input class="w3-input w3-border " type="number" id="age" name="age" min=0 max=160 />
+        </div>
+        </div>
+        <br>
+   		 <div class="w3-row-padding">
+   		  <div class="w3-half">
+      <label>Interested in</label>
+      <select  id="interestedin" data-placeholder="Interested in..." name="interestedin">
 						<option value="w">Women</option>
 						<option value="m">Men</option>
-					</select><br>
-	Ethnicity: <input id="etnicity" type="text" name="etnicity" /><br>
-	Height: <input id="height" type="number" name="height" min=0 max=300/> cm<br>
-	Weight: <input id="weight" type="number" name="weight" min=0 max=1000/> kg<br>
-	Religion: <select id="religion" name="">
-  <option name="religion">-- select one --</option>
-  <option value="African Traditional & Diasporic">African Traditional & Diasporic</option>
-  <option value="Agnostic">Agnostic</option>
-  <option value="Atheist">Atheist</option>
-  <option value="Baha'i">Baha'i</option>
-  <option value="Buddhism">Buddhism</option>
-  <option value="Cao Dai">Cao Dai</option>
-  <option value="Chinese traditional religion">Chinese traditional religion</option>
-  <option value="Christianity">Christianity</option>
-  <option value="Hinduism">Hinduism</option>
-  <option value="Islam">Islam</option>
-  <option value="Jainism">Jainism</option>
-  <option value="Juche">Juche</option>
-  <option value="Judaism">Judaism</option>
-  <option value="Neo-Paganism">Neo-Paganism</option>
-  <option value="Nonreligious">Nonreligious</option>
-  <option value="Rastafarianism">Rastafarianism</option>
-  <option value="Secular">Secular</option>
-  <option value="Shinto">Shinto</option>
-  <option value="Sikhism">Sikhism</option>
-  <option value="Spiritism">Spiritism</option>
-  <option value="Tenrikyo">Tenrikyo</option>
-  <option value="Unitarian-Universalism">Unitarian-Universalism</option>
-  <option value="Zoroastrianism">Zoroastrianism</option>
-  <option value="primal-indigenous">primal-indigenous</option>
-  <option value="Other">Other</option>
-</select>
+	 </select>
+        </div>
+         <div class="w3-half">
+      <label>Ethnicity</label>
+       <input class="w3-input w3-border " id="etnicity" type="text" name="etnicity" placeholder="Here goes your ethnicity" />
+        </div>
+        </div>
+        <br>
+         <div class="w3-row-padding">
+          <div class="w3-half">
+      <label>Height (in Cm)</label>
+      <input  class="w3-input w3-border "  id="height" type="number" name="height" min=0 max=300/> 
+        </div>
+         <div class="w3-half">
+      <label>Weight (in Kg)</label>
+      <input class="w3-input w3-border " id="weight" type="number" name="weight" min=0 max=1000/>
+              </div>
+                      </div>
+              
+      
+        <br>
+        <div class="w3-row-padding">
+        <div class="w3-half">
+      <label> Religion</label>
+     <select id="religion" name="">
+		  <option name="religion">-- select one --</option>
+		  <option value="African Traditional & Diasporic">African Traditional & Diasporic</option>
+		  <option value="Agnostic">Agnostic</option>
+		  <option value="Atheist">Atheist</option>
+		  <option value="Baha'i">Baha'i</option>
+		  <option value="Buddhism">Buddhism</option>
+		  <option value="Cao Dai">Cao Dai</option>
+		  <option value="Chinese traditional religion">Chinese traditional religion</option>
+		  <option value="Christianity">Christianity</option>
+		  <option value="Hinduism">Hinduism</option>
+		  <option value="Islam">Islam</option>
+		  <option value="Jainism">Jainism</option>
+		  <option value="Juche">Juche</option>
+		  <option value="Judaism">Judaism</option>
+		  <option value="Neo-Paganism">Neo-Paganism</option>
+		  <option value="Nonreligious">Nonreligious</option>
+		  <option value="Rastafarianism">Rastafarianism</option>
+		  <option value="Secular">Secular</option>
+		  <option value="Shinto">Shinto</option>
+		  <option value="Sikhism">Sikhism</option>
+		  <option value="Spiritism">Spiritism</option>
+		  <option value="Tenrikyo">Tenrikyo</option>
+		  <option value="Unitarian-Universalism">Unitarian-Universalism</option>
+		  <option value="Zoroastrianism">Zoroastrianism</option>
+		  <option value="primal-indigenous">primal-indigenous</option>
+		  <option value="Other">Other</option>
+	</select>
+        </div>
+         </div>
+         <br>
+        
+       
+    </div>
+   
+  </div>
 	<br>
 	<b>Location</b><br>
 	
-		Region&raquo; <select onchange="set_country(this,country,city_state)" id="region" size="1" name="region">
+		Region&raquo; <select  class="w3-quarter" onchange="set_country(this,country,city_state)" id="region" size="1" name="region">
 		<option value="" selected="selected">SELECT REGION</option>
 		<option value=""></option>
 		<script type="text/javascript">
 		setRegions(this);
 		</script>
 		</select>
-		Country&raquo; <select id="country" name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
-		City/State&raquo; <select id="city_state" name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
-		<input type="submit" onclick="updateUser()" name="continueReg" value="update" /> 
+		Country&raquo; <select  class="w3-quarter" id="country" name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
+		City/State&raquo; <select  class="w3-quarter"  id="city_state" name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
+		<input class="w3-quarter" type="submit" onclick="updateUser()" name="continueReg" value="update" /> 
 
 		<div id="txtregion"></div>
 		<div id="txtplacename"></div>
+		
+		
+		
+				  
+<!--      <div id="divlocation1"></div>
+     <script>
+	divlocation1.insertAdjacentHTML('beforebegin', '
+			<div class="w3-container">
+    <div class="w3-panel w3-padding-16 w3-pale-green w3-opacity w3-card w3-hover-opacity-off">
+    <br><h2 class="w3-center">Location</h2><br>
+    Region&raquo; <select set_country(this,country,city_state)"  id="region" size="1" name="region" >
+	<option value="" selected="selected">SELECT REGION</option>
+	<option value=""></option>
+			');
+	setRegions(this);
+	
+	divlocation1.insertAdjacentHTML('afterend', '
+			</select>
+	Country&raquo; <select  id="country" name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
+	City/State&raquo; <select  id="city_state" name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
+	<input type="submit" onclick="updateUser()" name="continueReg" value="update" /> 
+	<div id="txtregion"></div>
+	<div id="txtplacename"></div>
+	</div>
+	</div>
+			
+			
+			');
+	
+	
+	</script>  -->
+     
+<!--            <div class="w3-container">
+    <div class="w3-panel w3-padding-16 w3-pale-green w3-opacity w3-card w3-hover-opacity-off">
+    <br><h2 class="w3-center">Location</h2><br>
+	
+		Region&raquo; <select set_country(this,country,city_state)"  id="region" size="1" name="region" >
+		<option value="" selected="selected">SELECT REGION</option>
+		<option value=""></option>
+		
+		<script type="text/javascript">
+		setRegions(this);
+		</script>
+		</select>
+		Country&raquo; <select  id="country" name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
+		City/State&raquo; <select  id="city_state" name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
+		<input type="submit" onclick="updateUser()" name="continueReg" value="update" /> 
+		<div id="txtregion"></div>
+		<div id="txtplacename"></div>
+		</div>
+		</div> -->
+		
+     
+<!-- 
+<div id= "divlocation1"></div>
+
+<div id= "divlocation2"></div>
+
+<script>
+divlocation1.insertAdjacentHTML('afterend', '<div class="w3-container">
+	    <div class="w3-panel w3-padding-16 w3-pale-green w3-opacity w3-card w3-hover-opacity-off">
+<h2 class="w3-center">Location</h2>
+<div class="w3-row-padding" >
+
+<div class="w3-third">
+ <label>Region</label>    
+
+Region&raquo;<select onchange="set_country(this,country,city_state)" id="region" size="1" name="region">
+	<option value="" selected="selected">SELECT REGION</option>
+	<option value=""></option> ');
+	
+	
+	setRegions(this);
+	
+	
+divlocation2.insertAdjacentHTML('beforebegin', ' </select>
+    
+        </div> 
+       	 <div class="w3-third">
+	      <label>Country</label><br>
+	   		Country&raquo; <select id="country" name="country" size="1" disabled="disabled" onchange="set_city_state(this,city_state)"></select>
+   		 </div>
+   		 
+   		 <div class="w3-third">
+	      <label>City/State</label><br>
+	  		 City/State&raquo; <select id="city_state" name="city_state" size="1" disabled="disabled" onchange="print_city_state(country,this)"></select>
+   		 </div>
+   		 <br>
+   		 <div class="w3-third">
+   		 <input class=" w3-pink " type="submit" onclick="updateUser()" name="continueReg" value="Submit" /> 
+
+		<div id="txtregion"></div>
+		<div id="txtplacename"></div>
+   		  </div>
+    </div>
+   </div>
+  </div>  ');
+
+</script> -->
 		
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script>
