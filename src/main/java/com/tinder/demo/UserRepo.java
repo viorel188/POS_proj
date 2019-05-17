@@ -18,4 +18,11 @@ public interface UserRepo extends JpaRepository<Users, Long> {
 	
 //	@Query("SELECT u.id, u.name, u.lastname, u.email, u.imgpath, u.country, u.city_state FROM Users u WHERE u.country = ?1")
 //	List<Users> findByCountryName(String country);
+	
+	@Query("SELECT u FROM Users u WHERE u.country = ?1 AND u.sex = ?2")
+	List<Users> findByCountryAndSex(String country, String sex);
+
+	@Query("SELECT u FROM Users u WHERE u.country = ?1 AND u.sex = ?2 AND u.interestedin = ?3")
+	List<Users> findByCountryAndSexAndInterestedIn(String country, String sex, String interestedin);
+
 }

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -66,7 +67,7 @@ public class HomeController {
 			String cryptedPassFromDataBase = users.get(0).getPass();
 			boolean doesMatch = BCrypt.checkpw(pass, cryptedPassFromDataBase);
 			if( doesMatch ) {
-				ModelAndView userView = new ModelAndView("home.jsp");
+				ModelAndView userView = new ModelAndView("userProfile.jsp");
 				session.setAttribute("user",users.get(0));
 				userView.addObject("user", "*good boi!");
 				return userView;
@@ -89,8 +90,8 @@ public class HomeController {
 		if (!users.isEmpty()) {
 			userToUpdate = users.get(0);
 			userToUpdate.setLastname(user.getLastname());
-			userToUpdate.setPhonenr(user.getPhonenr());
-			userToUpdate.setImgpath(user.getImgpath());
+			userToUpdate.setPhonenr(user.getPhonenr());			
+			userToUpdate.setImgpath( "profileImages/img-profile-missing.png" );	//////
 			userToUpdate.setDescription(user.getDescription());
 			userToUpdate.setLanguage(user.getLanguage());
 			userToUpdate.setSex(user.getSex());
@@ -103,13 +104,14 @@ public class HomeController {
 			userToUpdate.setRegion(user.getRegion());
 			userToUpdate.setCountry(user.getCountry());
 			userToUpdate.setCity_state(user.getCity_state());
+			session.setAttribute("user", userToUpdate);
 			repo.save(userToUpdate);
 		}else {
 			System.out.println("NO USER with this ID");
 		}
 		return profile;
 	}
-	
+		
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/webapp/profileImages";
 	@PostMapping("uploadFiles")
 	public String uploadFiles(Model model, @RequestParam("files") MultipartFile file, HttpSession session) {
@@ -129,7 +131,12 @@ public class HomeController {
 		Users userToUpdate = null;
 		if (!users.isEmpty()) {
 			userToUpdate = users.get(0);
-			userToUpdate.setImgpath( "profileImages/"+username + "/" + file.getOriginalFilename() );//filenameAndPath.toString() );
+			if( file.getOriginalFilename()==null || file.getOriginalFilename().equals("") ) {
+				userToUpdate.setImgpath( "profileImages/img-profile-missing.png");
+			}else {
+				userToUpdate.setImgpath( "profileImages/"+username + "/" + file.getOriginalFilename() );				
+			}
+			
 			System.out.println("Img: " + userToUpdate.getImgpath());
 			session.setAttribute("user", userToUpdate);
 			repo.save(userToUpdate);
@@ -138,6 +145,18 @@ public class HomeController {
 		}
 		return "userProfile.jsp";
 	}
+	
+	
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpSession session) {
+		session.removeAttribute("user");
+		session.invalidate();
+		return (new ModelAndView("loginup.jsp"));
+	}
+	
+	
+	
+	
 	
 	@PutMapping("/updateSmth")
 	@ResponseBody

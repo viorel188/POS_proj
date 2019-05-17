@@ -10,10 +10,13 @@
 <body>
 <%@ page import="com.tinder.demo.Users" %>
 	<%
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
+		response.setHeader("Pragma","no-cache"); // HTTP1.0
+		response.setHeader("Expires","0"); // Proxies
 		if(session.getAttribute("user")!=null){
 	%>
 			Hello, <% Users u = (Users)session.getAttribute("user"); %> <%= u.getName() %>!
-			<img id="myImg" src="<%=u.getImgpath()%>" alt="images/img-profile-missing.png" style="border-radius:80%;" height="100" weight="100">
+			<img id="myImg" src="<%=(u.getImgpath() != null) ? u.getImgpath() : "images/img-profile-missing.png" %>" style="border-radius:80%;" height="100" weight="100">
 			<h2>Hopefully, you'll find your love today! :)</h2>
 			
 			<!-- The Modal -->
@@ -34,6 +37,10 @@
 				<input type="submit" /><br>
 			</form>
 			
+			<br>
+			<form action="/logout">
+				<input type="submit" value="logout">
+			</form>
 			<br><hr><br>
 			
 			
@@ -51,6 +58,7 @@
 			<b>Region:</b> <%=u.getRegion()%>, <%=u.getCountry()%>, <%=u.getCity_state()%><br><hr>
 			
 			
+			<div id="userProfiles"></div>
 			<button onclick="showUsersFromSameCountry()">Browse your love!</button>
 			
 			<script>
@@ -79,18 +87,103 @@
 			<script>
 				function showUsersFromSameCountry(){
 					var userCountry = "<%=u.getCountry()%>";
-					var url = "users/"+userCountry;
+					var userSex = "<%=u.getSex()%>";
+					var userInterestedin = "<%=u.getInterestedin()%>";
+					
+					var potentialPartersSex = (userInterestedin == "Women") ? "F" : ((userInterestedin == "Men") ? "M" : "errorParterSex");
+					var potentialPartersInterests = (userSex == "F") ? "Women" : ((userSex == "M") ? "Men" : "errorParterInterets");
+					var url = "find/"+userCountry+"&"+potentialPartersSex+"&"+potentialPartersInterests;
 					$.get(url,function(data){
 							//for(i=0; i<data.length; ++i){
 								//alert(data[i].email + " " + data[i].name);
 							//}
-					
-							$.each(data, function(i, user){
-								alert(user.name + " " +user.email);
-							});
-						}	
-					);
+							var profileUsers = "<table>";
+							var i=0;
+							var j=i;
+							while( i<data.length ){
+								var currentUserId = <%=u.getId()%>;
+								if( data[i].id == currentUserId ){
+									j=i;
+									++i;
+									continue;
+								}
+								if( j%3==0 ){
+									profileUsers += "<tr>";
+								}
 								
+								profileUsers += "<td><img src='"+data[i].imgpath+"' height='100' weight='100'><br>"
+												+data[i].name+" "+data[i].lastname+"<br>"
+												+data[i].country+" "+data[i].city_state
+												+"<br><center><button onclick='likeDislike("+i+","+data[i].id+","+currentUserId
+												+")' id='likeBtn"+i+"'></button></center></td>";
+								if( (j+1)%3==0 ){
+									profileUsers += "</tr>";
+								}
+								++j;
+								++i;
+							}
+							profileUsers += "</table>";							
+							$("#userProfiles").html(profileUsers);
+							
+							/* show which users are already liked */
+							var checkLikeUrl = "checklikes/" + <%=u.getId()%>;// + "&" + data[i].id;
+							$.get(checkLikeUrl, function(checkLikeData){
+								console.log(checkLikeData);
+								for(i=0; i<data.length; ++i){
+									//console.log(data[i].id);
+									console.log("inArr "+i+": "+$.inArray(data[i].id, checkLikeData));
+									if( $.inArray(data[i].id, checkLikeData)==-1 ){
+										$("#likeBtn"+i).text("Like");
+									}else{
+										$("#likeBtn"+i).text("Liked");
+									}						
+								}
+							});
+						}
+					);	
+				}
+			</script>
+			<script>				
+				function likeDislike(i_id, plikedUserId, puserId)
+				{
+					var newLikeData = JSON.stringify(
+			    		{
+			    			liked_user_id : plikedUserId,
+			    			user_id : puserId
+			    		}
+			    	);
+				    var elem = document.getElementById("likeBtn"+i_id);
+				    if ( elem.innerHTML == "Like" ) {
+				    	elem.innerHTML = "Liked";
+				    	// insert likedUserId and userId in 'Liketable' table
+				    	//alert("Inainte de post: "+newLikeData);
+				    	$.ajax('/addLike', {
+							type: 'POST',
+							contentType: 'application/json',
+							data: newLikeData,
+							success: function(data, textStatus, jqXHR ){
+								//alert(" sent " +data + ", status: "+textStatus);
+							},
+							error: function(jqXhr, textStatus, errorMessage){
+								//console.log(jqXhr);
+								//alert("idk: "+errorMessage + " , textStatus: " + textStatus + " , jqXhr: "+jqXhr);
+							}
+						});
+				    }else {
+				    	elem.innerHTML = "Like";
+				    	$.ajax('/deleteLike', {
+							type: 'DELETE',
+							contentType: 'application/json',
+							data: newLikeData,
+							success: function(data, textStatus, jqXHR ){
+								//alert(" sent " +data + ", status: "+textStatus);
+							},
+							error: function(jqXhr, textStatus, errorMessage){
+								console.log(jqXhr);
+								//alert("idk: "+errorMessage + " , textStatus: " + textStatus + " , jqXhr: "+jqXhr);
+							}
+						});
+				    }
 				}
 			</script>
 			<script src="vendor/jquery/jquery.min.js"></script>
