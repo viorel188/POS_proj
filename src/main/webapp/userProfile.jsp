@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>My Profile</title>
 <style > 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -16,6 +16,11 @@
 .title {
   color: grey;
   font-size: 18px;
+}
+
+td
+{
+    padding:0 16px 0 16px;
 }
 
 button {
@@ -145,6 +150,9 @@ button:hover, a:hover {
     	
 		   <!-- End Left Column -->
     </div>
+    
+    
+    
 		 <!-- Middle Column -->
     <div class="w3-col m7">
     
@@ -152,17 +160,47 @@ button:hover, a:hover {
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              <p contenteditable="true" class="w3-border w3-padding"  id="statusMes" >Status: Feeling Blue</p>
+              <button type="button" onclick="updateStatus()"  class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              
+              <!-- <input class="w3-quarter" type="submit" onclick="updateUser()" name="continueReg" value="update" />  -->
             </div>
           </div>
         </div>
       </div>
       
+<!--       <script>
+      function updateStatus(){
+			var smes = $('#statusMes').val();
+	
+			//alert("yo "+n+l+p);
+			var updateStatusData = JSON.stringify(
+					{
+						smes : $('#statusMes').val(),
+				
+					}
+				);
+			$.ajax('/updateStatus', {
+				type: 'POST',
+				contentType: 'application/json',
+				data: updateData,
+				success: function(data, textStatus, jqXHR ){
+					location.replace("http://localhost:8080/userProfile.jsp");
+					//alert(" sent " +data + ", status: "+textStatus);
+				},
+				error: function(jqXhr, textStatus, errorMessage){
+					console.log(jqXhr);
+//					alert(jqXhr);
+//					alert("idk: "+errorMessage + " , textStatus: " + textStatus + " , jqXhr: "+jqXhr);
+				}
+			});
+		}
+      </script> -->
+      
 			<br>
 			<hr>
 			<div id="userProfiles"></div>
-			<button onclick="showUsersFromSameCountry()">Browse your love!</button>
+			<button class="w3-button w3-theme" onclick="showUsersFromSameCountry()">Browse your love!</button>
 			<hr>
 			<br>
       
@@ -271,7 +309,7 @@ button:hover, a:hover {
 							//for(i=0; i<data.length; ++i){
 								//alert(data[i].email + " " + data[i].name);
 							//}
-							var profileUsers = "<table>";
+							var profileUsers = "<table class= 'w3-container w3-center ' >";
 							var i=0;
 							var j=i;
 							while( i<data.length ){
@@ -281,16 +319,17 @@ button:hover, a:hover {
 									++i;
 									continue;
 								}
-								if( j%3==0 ){
-									profileUsers += "<tr>";
+								if( j%4==0 ){
+									profileUsers += "<tr class='w3-padding-16'>";
 								}
 								
-								profileUsers += "<td><img src='"+data[i].imgpath+"' height='100' weight='100'><br>"
+								profileUsers += "<td class='w3-card w3-padding-16  w3-white w3-center' ><img class=' w3-round ' src='"+data[i].imgpath+"' height='100' weight='100'><br>"
 												+data[i].name+" "+data[i].lastname+"<br>"
 												+data[i].country+" "+data[i].city_state
-												+"<br><center><button onclick='likeDislike("+i+","+data[i].id+","+currentUserId
-												+")' id='likeBtn"+i+"'></button></center></td>";
-								if( (j+1)%3==0 ){
+												+"<br><center><button class='w3-button w3-theme' onclick='likeDislike("+i+","+data[i].id+","+currentUserId
+												+")' id='likeBtn"+i+"'></button></center>"
+												+"<center><button class='w3-button w3-theme' onclick='#' id='addFrBtn' >Add Friend</button></center></td>";
+								if( (j+1)%4==0 ){
 									profileUsers += "</tr>";
 								}
 								++j;

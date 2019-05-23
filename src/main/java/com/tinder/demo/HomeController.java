@@ -81,6 +81,23 @@ public class HomeController {
 		}
 	}
 	
+	
+	/*
+	 * @PostMapping("/updateStatus") public ModelAndView updateStatus(@RequestBody
+	 * Users user, HttpSession session) { ModelAndView profile = new
+	 * ModelAndView("userProfile.jsp"); Users currentUser = (Users)
+	 * session.getAttribute("user"); List<Users> users =
+	 * repo.findByEmail(currentUser.getEmail()); Users userToUpdate = null; if
+	 * (!users.isEmpty()) { userToUpdate = users.get(0);
+	 * userToUpdate.setStatusMessage(user.getStatusMessage());
+	 * 
+	 * session.setAttribute("user", userToUpdate); repo.save(userToUpdate); }else {
+	 * System.out.println("NO USER with this ID"); } return profile;
+	 * 
+	 * 
+	 * }
+	 */
+	
 	@PostMapping("/updateUser")
 	public ModelAndView updateUser(@RequestBody Users user, HttpSession session) {
 		ModelAndView profile = new ModelAndView("userProfile.jsp");
@@ -111,6 +128,7 @@ public class HomeController {
 		}
 		return profile;
 	}
+	
 		
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/webapp/profileImages";
 	@PostMapping("uploadFiles")

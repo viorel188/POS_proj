@@ -27,6 +27,7 @@ public class Users {
 	private String region;
 	private String country;
 	private String city_state;
+	/* private String statusMessage; */
 	
 	public long getId() {
 		return id;
@@ -179,6 +180,13 @@ public class Users {
 	public void setCity_state(String city_state) {
 		this.city_state = city_state;
 	}
+	
+	/*
+	 * public String getStatusMessage() { return statusMessage; }
+	 * 
+	 * public void setStatusMessage(String statusMessage) { this.statusMessage =
+	 * statusMessage; }
+	 */	
 
 	@Override
 	public String toString() {
@@ -186,7 +194,9 @@ public class Users {
 		builder.append("Users [name=").append(name).append(", lastname=").append(lastname).append(", email=")
 				.append(email).append("]");
 		return builder.toString();
-	}	
+	}
+
+	
 	
 	
 }
