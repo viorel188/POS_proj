@@ -38,8 +38,15 @@ textarea { height: auto;
 
 
 </style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="css/modalImageStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body  class="w3-theme-l5">
 <script src="js/city_state.js"></script>
 <%@ page import="com.tinder.demo.Users" %>
 	<%
@@ -51,6 +58,40 @@ textarea { height: auto;
 			response.sendRedirect("loginup.jsp");
 		}
 	%>
+	
+	
+	
+	
+	<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
+  
+  <!-- <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a> -->
+ <!--  <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">One new friend request</a>
+      <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
+      <a href="#" class="w3-bar-item w3-button">Jane likes your post</a> -->
+    </div>
+  </div>
+  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+    <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar">
+  </a>
+ </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+<!--   <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a> -->
+</div>
 	<!-- Fill in your missing data!
 	Name: <input type="text" id="name" name="name"/><br>
 	Lastname: <input type="text" id="lastname" name="lastname"/><br> -->
@@ -81,8 +122,37 @@ textarea { height: auto;
       <input class="w3-input w3-border " type="text" id="phonenr" name="phonenr" placeholder="Insert your phone number" />
         </div>
        	 <div class="w3-half">
-	      <label>Profile Image</label><br>
-	      <input  class="w3-input w3-border "  type="file" name="imgpath" id="imgpath" accept="image/*" />
+	    <!--   <label>Profile Image</label><br>
+	      <input  class="w3-input w3-border "  type="file" name="imgpath" id="imgpath" accept="image/*" /> -->
+	      <label> Religion</label>
+     <select id="religion" name="">
+		  <option name="religion">-- select one --</option>
+		  <option value="African Traditional & Diasporic">African Traditional & Diasporic</option>
+		  <option value="Agnostic">Agnostic</option>
+		  <option value="Atheist">Atheist</option>
+		  <option value="Baha'i">Baha'i</option>
+		  <option value="Buddhism">Buddhism</option>
+		  <option value="Cao Dai">Cao Dai</option>
+		  <option value="Chinese traditional religion">Chinese traditional religion</option>
+		  <option value="Christianity">Christianity</option>
+		  <option value="Hinduism">Hinduism</option>
+		  <option value="Islam">Islam</option>
+		  <option value="Jainism">Jainism</option>
+		  <option value="Juche">Juche</option>
+		  <option value="Judaism">Judaism</option>
+		  <option value="Neo-Paganism">Neo-Paganism</option>
+		  <option value="Nonreligious">Nonreligious</option>
+		  <option value="Rastafarianism">Rastafarianism</option>
+		  <option value="Secular">Secular</option>
+		  <option value="Shinto">Shinto</option>
+		  <option value="Sikhism">Sikhism</option>
+		  <option value="Spiritism">Spiritism</option>
+		  <option value="Tenrikyo">Tenrikyo</option>
+		  <option value="Unitarian-Universalism">Unitarian-Universalism</option>
+		  <option value="Zoroastrianism">Zoroastrianism</option>
+		  <option value="primal-indigenous">primal-indigenous</option>
+		  <option value="Other">Other</option>
+	</select>
    		 </div>
    		 </div>
    		 <br>
@@ -209,7 +279,7 @@ textarea { height: auto;
               
       
         <br>
-        <div class="w3-row-padding">
+      <!--   <div class="w3-row-padding">
         <div class="w3-half">
       <label> Religion</label>
      <select id="religion" name="">
@@ -242,7 +312,7 @@ textarea { height: auto;
 	</select>
         </div>
          </div>
-         <br>
+         <br> -->
         
        
     </div>
@@ -265,7 +335,13 @@ textarea { height: auto;
 		<div id="txtregion"></div>
 		<div id="txtplacename"></div>
 		
-		
+		<footer class="w3-container w3-theme-d3 w3-padding-16">
+  <h5>Footer</h5>
+</footer>
+
+<footer class="w3-container w3-theme-d5">
+  <p>Powered by Hello Kitty  !!!</p>
+</footer>	
 		
 				  
 <!--      <div id="divlocation1"></div>

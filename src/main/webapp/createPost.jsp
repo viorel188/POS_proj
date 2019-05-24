@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Profile</title>
+<title>Create a New Post</title>
 <style > 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -58,6 +58,9 @@ button:hover, a:hover {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="w3-theme-l5">
+
+
+
 <%@ page import="com.tinder.demo.Users" %>
 	<%
 		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
@@ -66,16 +69,17 @@ button:hover, a:hover {
 		if(session.getAttribute("user")!=null){
 	%>
 		<% Users u = (Users)session.getAttribute("user"); %>
+		<%-- <% Posts p = (Posts)session.getAttribute("post"); %> --%>
 		
 		<!-- Navbar -->
 <div class="w3-top">
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-  <a href ="createPost.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Post"><i class="fa fa-plus"></i></a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+   <a href ="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Post"><i class="fa fa-plus"></i></a>
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
     <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
@@ -84,7 +88,7 @@ button:hover, a:hover {
       <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
     </div>
   </div>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
   <!--   <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
    <img id="navBarImg" src="<%=(u.getImgpath() != null) ? u.getImgpath() : "images/img-profile-missing.png" %>" class="w3-circle" style="height:42px;width:42px" alt="Avatar">
   </a>
@@ -93,11 +97,10 @@ button:hover, a:hover {
 
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-  <a href="createPost.jsp" class="w3-bar-item w3-button w3-padding-large">Create New Post</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 </div>
 		
 		<!-- Page Container -->
@@ -105,7 +108,6 @@ button:hover, a:hover {
 		  <!-- The Grid -->
   <div class="w3-row">
   
-		
 		
 	 <!-- Left Column -->
     <div class="w3-col m3">
@@ -153,73 +155,28 @@ button:hover, a:hover {
 			<br>
 			   </div>
 			</div>
-    
-    	
 		   <!-- End Left Column -->
-    </div>
-    
-    
-    
+    </div>   
 		 <!-- Middle Column -->
-    <div class="w3-col m7">
-    
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <p contenteditable="true" class="w3-border w3-padding"  id="statusMes" >Status: Feeling Blue</p>
-              <button type="button" onclick="updateStatus()"  class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
-              
-              <!-- <input class="w3-quarter" type="submit" onclick="updateUser()" name="continueReg" value="update" />  -->
-            </div>
-          </div>
-        </div>
-      </div>
-      
-<!--       <script>
-      function updateStatus(){
-			var smes = $('#statusMes').val();
-	
-			//alert("yo "+n+l+p);
-			var updateStatusData = JSON.stringify(
-					{
-						smes : $('#statusMes').val(),
-				
-					}
-				);
-			$.ajax('/updateStatus', {
-				type: 'POST',
-				contentType: 'application/json',
-				data: updateData,
-				success: function(data, textStatus, jqXHR ){
-					location.replace("http://localhost:8080/userProfile.jsp");
-					//alert(" sent " +data + ", status: "+textStatus);
-				},
-				error: function(jqXhr, textStatus, errorMessage){
-					console.log(jqXhr);
-//					alert(jqXhr);
-//					alert("idk: "+errorMessage + " , textStatus: " + textStatus + " , jqXhr: "+jqXhr);
-				}
-			});
-		}
-      </script> -->
-      
-			<br>
-			<hr>
-			<div id="userProfiles"></div>
-			<button class="w3-button w3-theme" onclick="showUsersFromSameCountry()">Browse your love!</button>
-			<hr>
-			<br>
-      
-       
+    <div class="w3-col m7">       
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">16 min</span>
-        <h4>Jane Doe</h4><br>
-        <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+      
+        <img id="myImg" src="<%=(p.getImgpath() != null) ? p.getImgpath() : "images/img-profile-missing.png" %>"  style="height:260px;width:420px" alt="New Post Image">
+        <form action="/uploadFiles" method="post" enctype="multipart/form-data">
+				<input type="file" name="files" value="Select Post Image !"/> <!-- multiple /><br> -->
+				<input type="Submit" /><br>
+		</form>
+	  <div class="w3-row-padding">
+      <div class="w3-half">
+      <label>Title</label>
+      <input class="w3-input w3-border w3-padding-16" type="text" id="postTitle"  placeholder="Insert the title to your new post" name="title"/>
+        </div>
+       	 <div class="w3-half">
+	      <label>Post Description</label><br>
+	     <textarea   id="postDescription"  placeholder="Here goes the content of your post (Be mindfull , max 2000 characters !) ." name="postDescription"></textarea>
+   		 </div>
+    </div>
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-paper-plane"></i> Post</button> 
       </div> 
 
    
