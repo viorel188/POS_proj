@@ -11,5 +11,5 @@ public interface LikedProfilesRepo extends JpaRepository<Liketable, Long> {
 	Long findByIdLike(Long likedUserId, Long userId);
 	
 	@Query("Select l.liked_user_id FROM Liketable l WHERE l.user_id = ?1")
-	List<Long> findByUser_id(Long user_id);
+	List<Long> findUsersLikedByUser_id(Long user_id);
 }
