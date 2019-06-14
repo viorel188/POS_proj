@@ -74,8 +74,8 @@ button:hover, a:hover {
   <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-  <a href ="createPost.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Post"><i class="fa fa-plus"></i></a>
+  <a href="chat.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+  <a href ="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Post"><i class="fa fa-plus"></i></a>
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
     <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
@@ -95,7 +95,7 @@ button:hover, a:hover {
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
   <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+  <a href="chat.jsp" class="w3-bar-item w3-button w3-padding-large">Chat</a>
   <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
   <a href="createPost.jsp" class="w3-bar-item w3-button w3-padding-large">Create New Post</a>
 </div>
@@ -128,7 +128,8 @@ button:hover, a:hover {
 			</div>
 				<form action="/uploadFiles" method="post" enctype="multipart/form-data">
 				<input type="file" name="files" value="Choose profile image"/> <!-- multiple /><br> -->
-				<input type="submit" /><br>
+				<br>
+				<input class="w3-button w3-theme" type="submit"  value="Change Photo"/><br>
 			</form>
 			  <h1> <%= u.getName() %>! </h1>
 			  <p class="title">Personal Info:</p>
@@ -148,7 +149,8 @@ button:hover, a:hover {
 			  <!-- <p><button>Contact</button></p> -->
 			  	<br>
 			<form action="/logout">
-				<input type="submit" value="logout">
+				<input type="submit" class="w3-button w3-theme" value="Logout">
+			<!-- 	<button type="button" onclick="updateStatus()"  class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>  -->
 			</form>
 			<br>
 			   </div>
@@ -335,8 +337,8 @@ button:hover, a:hover {
 												+data[i].name+" "+data[i].lastname+"<br>"
 												+data[i].country+" "+data[i].city_state
 												+"<br><center><button class='w3-button w3-theme' onclick='likeDislike("+i+","+data[i].id+","+currentUserId
-												+")' id='likeBtn"+i+"'></button></center>"
-												+"<center><button class='w3-button w3-theme' onclick='#' id='addFrBtn' >Add Friend</button></center></td>";
+												+")' id='likeBtn"+i+"'></button></center>";
+												
 								if( (j+1)%4==0 ){
 									profileUsers += "</tr>";
 								}

@@ -227,29 +227,29 @@ UNLOCK TABLES;
 -- Table structure for table `post`
 --
 
-DROP TABLE IF EXISTS `post`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `post` (
-  `idPost` int(11) NOT NULL AUTO_INCREMENT,
-  `postDescription` varchar(500) DEFAULT NULL,
-  `postImage` longblob,
-  `idUser` int(11) DEFAULT NULL,
-  `created` datetime DEFAULT NULL,
-  PRIMARY KEY (`idPost`),
-  KEY `idUser_idx` (`idUser`),
-  CONSTRAINT `idUser` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- DROP TABLE IF EXISTS `post`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+--  SET character_set_client = utf8mb4 ;
+-- CREATE TABLE `post` (
+--   `idPost` int(11) NOT NULL AUTO_INCREMENT,
+--   `postDescription` varchar(500) DEFAULT NULL,
+--   `postImage` longblob,
+--   `idUserPost` int(11) DEFAULT NULL,
+--   `created` datetime DEFAULT NULL,
+--   PRIMARY KEY (`idPost`),
+--   KEY `idUser_idx` (`idUserPost`),
+--   CONSTRAINT `idUserPost` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `post`
 --
 
-LOCK TABLES `post` WRITE;
-/*!40000 ALTER TABLE `post` DISABLE KEYS */;
-/*!40000 ALTER TABLE `post` ENABLE KEYS */;
-UNLOCK TABLES;
+-- LOCK TABLES `post` WRITE;
+-- /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+-- /*!40000 ALTER TABLE `post` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `posts`

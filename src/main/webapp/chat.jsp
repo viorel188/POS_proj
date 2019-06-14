@@ -3,12 +3,60 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<style > 
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
 
-<style>
-	
-</style>
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+td
+{
+    padding:0 16px 0 16px;
+}
+hr
+{
+ color : 
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="css/modalImageStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link rel="stylesheet" href="css/chatStyle.css">
 <!-- Latest compiled and minified CSS -->
@@ -20,6 +68,87 @@
 </head>
 <body>
 	<%@ page import="com.tinder.demo.Users" %>
+
+	<% Users u = (Users)session.getAttribute("user"); %>
+	<!-- Navbar -->
+<div class="w3-top">
+ <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
+  <a href="chat.jsp" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+  
+  <div class="w3-dropdown-hover w3-hide-small">
+    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
+    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
+      <a href="#" class="w3-bar-item w3-button">One new friend request</a>
+      <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
+      <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
+    </div>
+  </div>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+  <!--   <img src="/w3images/avatar2.png" class="w3-circle" style="height:23px;width:23px" alt="Avatar"> -->
+   <img id="navBarImg" src="<%=(u.getImgpath() != null) ? u.getImgpath() : "images/img-profile-missing.png" %>" class="w3-circle" style="height:42px;width:42px" alt="Avatar">
+  </a>
+ </div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+  <a href="chat.jsp" class="w3-bar-item w3-button w3-padding-large">Chat</a>
+  <a href="userProfile.jsp" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+	
+	
+			<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width: 1400px; margin-top:80px">   
+		  <!-- The Grid -->
+  <div class="w3-row">
+  
+		 <!-- Left Column -->
+    <div class="w3-col m2">
+	<!-- 	 <div class="card   w3-white">
+      <div class="w3-container">
+     </div>
+      </div> -->
+      
+   	
+       	    <div class="row" >
+	    <div id="chatUsers" class="w3-col m2" >	    	
+	    </div> 
+		</div>
+		   <!-- End Left Column -->
+    </div>
+		 <!-- Middle Column -->
+    <div class="w3-col m10">
+    
+    
+			<br>
+			<hr>
+		
+	<div id="chat" class="w3-col m6" style="background-color:lavenderblush; width: auto; ">
+	    	
+	    </div>		
+			
+			<hr>
+			<br>
+      
+      
+    <!-- End Middle Column -->
+    </div>
+			    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+	
+	
+	<!-- 
 	<div class="row">
 	    <div id="chatUsers" class="col-sm-2" >
 	    	
@@ -29,13 +158,18 @@
 	    	
 	    	
 	    </div>
-	</div>
+	</div> -->
 	
 	<% // HUINEAUA ASTA TREBU STEARSA!!!!!!!!!! IT'S ONLY FOR TESTING PURPOSE
 		//Users u = new Users();
 		//u.setId(52);
 		//session.setAttribute("user",u);
 	%>
+	
+	
+
+	
+	
 	<script>
 		$( document ).ready(function() {			
 			$.ajax({
@@ -46,7 +180,7 @@
 			    	//console.log(friendsData);
 					for(i=0; i<friendsData.length; ++i){
 						friendUsers += "<li class='friends' id='li"+i+
-							"' style='background-color:lavender;'"+
+							"' style='background-color:lavender;  background-size: 2000px;'"+
 							"onMouseOver=\"this.style.color='#F8F8F8'\" onMouseOut=\"this.style.color='#000'\"" +
 							"onclick=\"showChat(this,"+friendsData[i].id+")\">"+ friendsData[i].name +"</li>";
 					}
@@ -60,6 +194,8 @@
 			    }
 			});
 		});
+		
+		
 		
 		var currentIdInMessagesTable;
 		function showChat(elem, chatPartnerId){
@@ -75,11 +211,14 @@
 			    +"</div>"
 			  +"</div>"
 			 // +"<div class='send-message-form'>"
-			    +"<input type='text' placeholder='Your message'>"
-			    +"<button onclick=\"showMessages("+chatPartnerId+")\">Send</button>"
+			   /*  +"<input type='text' placeholder='Your message'>" */
+			    +"<textarea   rows='4' cols='100' placeholder='Say something nice...' name='Your Message'></textarea>"
+			    +"<button class='w3-button w3-theme'  onclick=\"showMessages("+chatPartnerId+")\">Send</button>"
 			//	+"</div>"
 			  +"</div>";
 			$("#chat").html(chatbox);
+			
+			
 			
 			/*
 				Se va introduce in chatbox ultimele 50 de mesaje, gasite in baza de date.
@@ -89,9 +228,11 @@
 		
 		/* Trebuie si o fcti setInterval care verifica daca apar mesaje noi in DB */
 		
+		
+		
 		function showMessages(chatPartnerId) {
 			//console.log(chatPartnerId);
-			var messageText = $('input').val();
+			var messageText = $('textarea').val();
 			var profileImage = '<%=((Users)session.getAttribute("user")).getImgpath()%>';
 			var currentTime = getCurrentTime();
 			/* 
@@ -198,5 +339,18 @@
 			}, 1000);
 		}
 	</script>
+	
+		
+	<br>
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-d3 w3-padding-16">
+  <h5>Footer</h5>
+</footer>
+
+<footer class="w3-container w3-theme-d5">
+  <p>Powered by Hello Kitty !!!</p>
+</footer>	 
+			
 </body>
 </html>
